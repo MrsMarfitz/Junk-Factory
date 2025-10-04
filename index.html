@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generator Invoice Profesional</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/html3pdf@0.12.2/dist/html3pdf.bundle.min.js"
+      integrity="sha256-CttAYs7jo+fs0yMnTXCIkRTa8hOPrQj1JzAC71doUbw="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="login-page" class="login-page">
+  <div class="card login-card">
+    <div class="cardheader">
+      <h2>Login Aplikasi Invoice</h2>
+    </div>
+    <div class="cardbody">
+      <p class="mb-8">Masukkan username dan kata sandi untuk mengakses generator invoice.</p>
+      <div class="form-group">
+        <label for="usernameInput" class="form-label">Username</label>
+        <input type="text" id="usernameInput" class="form-control" placeholder="Masukkan username" required />
+      </div>
+      <div class="form-group">
+        <label for="passwordInput" class="form-label">Kata Sandi</label>
+        <input type="password" id="passwordInput" class="form-control" placeholder="Masukkan kata sandi" required />
+      </div>
+      <button type="button" id="loginBtn" class="btn btn--primary btn--full-width mt-16">Login</button>
+      <div id="loginMessage" class="mt-8"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container app-content hidden" id="appContent">
+  <header class="app-header">
+    <h1>Invoice Profesional</h1>
+    <button id="logoutBtn" class="btn btn--secondary" style="position: absolute; top: 20px; right: 20px;">Logout</button>
+  </header>
+            
+
+      <div class="main-content">
+        <div class="form-section">
+          <div class="card">
+            <div class="card__header">
+              <h2>Informasi Invoice</h2>
+            </div>
+            <div class="card__body">
+              <form id="invoiceForm" class="invoice-form">
+                <div class="form-section-group">
+                  <h3>Informasi Penjual</h3>
+                  <div class="form-group">
+                    <label for="logoUpload" class="form-label">Unggah Logo (Maksimal 150x150px)</label>
+                    <input type="file" id="logoUpload" class="form-control" accept="image/*" />
+                    <div class="logo-preview-container mt-8">
+                        <img id="logoPreview" class="logo-preview" src="" alt="Pratinjau Logo" style="display: none;">
+                        <span id="noLogoText" style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Belum ada logo diunggah.</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="sellerCompany" class="form-label"
+                      >Nama Perusahaan *</label
+                    >
+                    <input
+                      type="text"
+                      id="sellerCompany"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="sellerAddress" class="form-label"
+                      >Alamat *</label
+                    >
+                    <textarea
+                      id="sellerAddress"
+                      class="form-control"
+                      rows="3"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="sellerNPWP" class="form-label"
+                        >NPWP (Opsional)</label
+                      >
+                      <input type="text" id="sellerNPWP" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label for="sellerPhone" class="form-label"
+                        >Telepon</label
+                      >
+                      <input
+                        type="text"
+                        id="sellerPhone"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="sellerEmail" class="form-label">Email</label>
+                    <input type="email" id="sellerEmail" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-section-group">
+                  <h3>Informasi Pelanggan</h3>
+                  <div class="form-group">
+                    <label for="customerCompany" class="form-label"
+                      >Nama Perusahaan *</label
+                    >
+                    <input
+                      type="text"
+                      id="customerCompany"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="customerContact" class="form-label"
+                      >Nama Kontak *</label
+                    >
+                    <input
+                      type="text"
+                      id="customerContact"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="customerAddress" class="form-label"
+                      >Alamat *</label
+                    >
+                    <textarea
+                      id="customerAddress"
+                      class="form-control"
+                      rows="3"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="customerEmail" class="form-label"
+                        >Email</label
+                      >
+                      <input
+                        type="email"
+                        id="customerEmail"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="customerPhone" class="form-label"
+                        >Telepon</label
+                      >
+                      <input
+                        type="text"
+                        id="customerPhone"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section-group">
+                  <h3>Detail Invoice</h3>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="invoiceNumber" class="form-label"
+                        >Nomor Invoice</label
+                      >
+                      <input
+                        type="text"
+                        id="invoiceNumber"
+                        class="form-control"
+                        readonly
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="invoiceDate" class="form-label"
+                        >Tanggal Invoice *</label
+                      >
+                      <input
+                        type="date"
+                        id="invoiceDate"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="dueDate" class="form-label"
+                        >Tanggal Jatuh Tempo</label
+                      >
+                      <input type="date" id="dueDate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label for="paymentTerms" class="form-label"
+                        >Termin Pembayaran</label
+                      >
+                      <input
+                        type="text"
+                        id="paymentTerms"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="invoiceNotes" class="form-label">Catatan</label>
+                    <textarea
+                      id="invoiceNotes"
+                      class="form-control"
+                      rows="2"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="form-section-group">
+                  <h3>Pengaturan</h3>    
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="checkbox-label">
+                        <input type="checkbox" id="enablePPN" />
+                        <span>Aktifkan PPN 11%</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-row" style="display: flex; gap: 16px;">
+  <div class="form-group" style="flex:2; min-width: 220px;">
+    <label for="globalDiscount" class="form-label" style="margin-bottom:4px;">Diskon Global</label>
+    <div style="display: flex; align-items: center;">
+      <input
+        type="number"
+        id="globalDiscount"
+        class="form-control"
+        placeholder="0"
+        style="width: 420px; margin-right:10px;"
+      />
+      <select id="globalDiscountType" class="form-control" style="width: 70px; padding: 1 8px;">
+        <option value="nominal">Rp</option>
+        <option value="percent">%</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group" style="flex:2; min-width: 220px;">
+    <label for="shippingCost" class="form-label" style="margin-bottom:4px;">Ongkos Kirim (Rp)</label>
+    <input
+      type="text"
+      id="shippingCost"
+      class="form-control"
+      placeholder="0"
+      style="width: 420px;"
+    />
+  </div>
+</div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <h3>Daftar Item</h3>
+              <button type="button" id="addItemBtn" class="btn btn--primary">
+                Tambah Item
+              </button>
+            </div>
+            <div class="card__body">
+              <div class="table-container">
+                <table id="itemsTable" class="items-table">
+                  <thead>
+                    <tr>
+                      <th>Deskripsi</th>
+                      <th>Qty</th>
+                      <th>Harga Satuan</th>
+                      <th>Pajak (%)</th>
+                      <th>Diskon (Rp)</th>
+                      <th>Total</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="itemsTableBody">
+                    </tbody>
+                </table>
+              </div>
+              <div class="items-summary">
+                <div class="summary-row">
+                  <span>Subtotal:</span>
+                  <span id="subtotalAmount">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                  <span>Diskon Global:</span>
+                  <span id="globalDiscountAmount">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                  <span>PPN 11%:</span>
+                  <span id="ppnAmount">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                  <span>Ongkos Kirim:</span>
+                  <span id="shippingAmount">Rp 0</span>
+                </div>
+                <div class="summary-row total-row">
+                  <span><strong>TOTAL:</strong></span>
+                  <span id="totalAmount"><strong>Rp 0</strong></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button type="button" id="resetBtn" class="btn btn--secondary">
+              Reset Form
+            </button>
+            <button type="button" id="saveJsonBtn" class="btn btn--outline">
+              Simpan JSON
+            </button>
+            <input
+              type="file"
+              id="loadJsonInput"
+              accept=".json"
+              style="display: none"
+            />
+            <button type="button" id="loadJsonBtn" class="btn btn--outline">
+              Muat JSON
+            </button>
+            <button type="button" id="generatePdfBtn" class="btn btn--primary">
+              Generate PDF
+            </button>
+          </div>
+        </div>
+
+        <div class="preview-section">
+          <div class="card">
+            <div class="card__header">
+              <h3>Preview Invoice</h3>
+            </div>
+            <div class="card__body">
+              <div id="invoicePreview" class="invoice-preview">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="invoice-print-area" class="invoice-print-area">
+      </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
